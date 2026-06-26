@@ -149,20 +149,34 @@ public class Main {
         System.out.println("未找到");
     }
 
-    // ===== 4 删除 =====
+    // ===== 4 删除学生信息（按学号）=====
     public static void delete() {
-        System.out.print("输入姓名:");
-        String name = sc.next();
+        System.out.println("\n========== 删除学生信息 ==========");
+        System.out.print("请输入要删除学生的学号：");
+        String id = sc.next();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getName().equals(name)) {
-                list.remove(i);
-                storage.save(list);
-                System.out.println("删除成功");
+            Student s = list.get(i);
+
+            if (s.getId().equals(id)) {
+                System.out.println("找到学生信息：");
+                System.out.println(s);
+
+                System.out.print("确认删除该学生全部信息吗？请输入 y 确认：");
+                String confirm = sc.next();
+
+                if (confirm.equalsIgnoreCase("y")) {
+                    list.remove(i);
+                    storage.save(list);
+                    System.out.println("删除成功！");
+                } else {
+                    System.out.println("已取消删除。");
+                }
                 return;
             }
         }
-        System.out.println("未找到");
+
+        System.out.println("未找到该学号对应的学生！");
     }
 
     // ===== 5 显示全部 =====
