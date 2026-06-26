@@ -33,6 +33,8 @@ public class Main {
                 case 0:
                     storage.save(list);
                     System.exit(0);
+                default:
+                    System.out.println("输入错误，请重新选择");
             }
         }
     }
@@ -165,9 +167,15 @@ public class Main {
 
     // ===== 5 显示全部 =====
     public static void showAll() {
+        System.out.println("\n========== 全部学生信息 ==========");
+        if (list.isEmpty()) {
+            System.out.println("当前系统中暂无学生信息。");
+            return;
+        }
         for (Student s : list) {
             System.out.println(s);
         }
+        System.out.println("当前学生总人数：" + list.size());
     }
 
     // ===== 6 按课程查询不及格学生名单 =====
