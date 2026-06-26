@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FileStudentStorage implements StudentStorage {
 
-    private static final String FILE_NAME = "student.txt";
+    private static final String FILE_NAME = "student.dat";
 
     @Override
     public void save(List<Student> list) {

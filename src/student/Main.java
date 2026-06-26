@@ -1,6 +1,5 @@
 package student;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Main {
         menu();
     }
 
-    // ===== 菜单 =====
+    // 菜单
     public static void menu() {
         while (true) {
             printMenu();
@@ -32,28 +31,30 @@ public class Main {
                 case 6: failList(); break;
                 case 0:
                     storage.save(list);
+                    System.out.println("数据已保存，系统已退出。");
                     System.exit(0);
+                    break;
                 default:
-                    System.out.println("输入错误，请重新选择");
+                    System.out.println("输入错误，请重新选择！");
             }
         }
     }
-    // ===== 打印系统菜单 =====
+    // 打印菜单
     public static void printMenu() {
         System.out.println();
         System.out.println("============================================");
         System.out.println("              学生成绩管理系统");
         System.out.println("============================================");
-        System.out.println("  1. 录入学生信息");
-        System.out.println("  2. 查询学生信息");
-        System.out.println("  3. 修改学生信息");
-        System.out.println("  4. 删除学生信息");
-        System.out.println("  5. 显示全部学生");
-        System.out.println("  6. 查询课程不及格学生名单");
-        System.out.println("  0. 保存并退出系统");
+        System.out.println("1.录入学生信息");
+        System.out.println("2.查询学生信息");
+        System.out.println("3.修改学生信息");
+        System.out.println("4.删除学生信息");
+        System.out.println("5.显示全部学生");
+        System.out.println("6.查询课程不及格学生名单");
+        System.out.println("0.保存并退出系统");
         System.out.println("============================================");
     }
-    // ===== 1 添加（限制100人）=====
+    // 1.录入学生信息
     public static void add() {
         if (list.size() >= 1000) {
             System.out.println("系统容量已满");
@@ -93,7 +94,7 @@ public class Main {
         System.out.println("添加成功");
     }
 
-    // ===== 2 查询（按姓名）=====
+    // 2.查询学生信息
     public static void find() {
         System.out.print("输入姓名:");
         String name = sc.next();
@@ -107,7 +108,7 @@ public class Main {
         System.out.println("未找到");
     }
 
-    // ===== 3 修改 =====
+    // 3.修改学生信息
     public static void update() {
         System.out.print("输入姓名:");
         String name = sc.next();
@@ -149,7 +150,7 @@ public class Main {
         System.out.println("未找到");
     }
 
-    // ===== 4 删除学生信息（按学号）=====
+    // 4.删除学生信息（按学号 避免姓名重复导致多删）
     public static void delete() {
         System.out.println("\n========== 删除学生信息 ==========");
         System.out.print("请输入要删除学生的学号：");
@@ -162,13 +163,13 @@ public class Main {
                 System.out.println("找到学生信息：");
                 System.out.println(s);
 
-                System.out.print("确认删除该学生全部信息吗？请输入 y 确认：");
+                System.out.print("确认删除该学生全部信息吗？请输入 是 确认：");
                 String confirm = sc.next();
 
-                if (confirm.equalsIgnoreCase("y")) {
+                if (confirm.equalsIgnoreCase("是")) {
                     list.remove(i);
                     storage.save(list);
-                    System.out.println("删除成功！");
+                    System.out.println("删除成功");
                 } else {
                     System.out.println("已取消删除。");
                 }
@@ -176,10 +177,10 @@ public class Main {
             }
         }
 
-        System.out.println("未找到该学号对应的学生！");
+        System.out.println("未找到该学号对应的学生");
     }
 
-    // ===== 5 显示全部 =====
+    // 5.显示全部学生信息
     public static void showAll() {
         System.out.println("\n========== 全部学生信息 ==========");
         if (list.isEmpty()) {
@@ -192,7 +193,7 @@ public class Main {
         System.out.println("当前学生总人数：" + list.size());
     }
 
-    // ===== 6 按课程查询不及格学生名单 =====
+    // 查询指定课程的不及格学生
     public static void failList() {
         System.out.println("\n========== 查询课程不及格学生名单 ==========");
         System.out.println("请选择课程：");
@@ -228,25 +229,32 @@ public class Main {
         System.out.println("--------------------------------------------");
 
         for (Student s : list) {
-            boolean fail = false;
+            float score;
 
             switch (course) {
                 case 1:
-                    fail = s.getMath() < 60;
+                    score = s.getMath();
                     break;
                 case 2:
-                    fail = s.getEnglish() < 60;
+                    score = s.getEnglish();
                     break;
                 case 3:
-                    fail = s.getCs() < 60;
+                    score = s.getCs();
                     break;
                 case 4:
-                    fail = s.getPe() < 60;
+                    score = s.getPe();
                     break;
+                default:
+                    return;
             }
 
-            if (fail) {
-                System.out.println(s);
+            if (score < 60) {
+                System.out.println(
+                        s.getName() +
+                                " [学号] " + s.getId() +
+                                " [班级] " + s.getClassName() +
+                                " | " + courseName + ":" + score
+                );
                 found = true;
             }
         }

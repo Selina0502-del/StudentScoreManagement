@@ -47,7 +47,8 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return id + " " + name + " " + className +
+        return name + " [学号] " + id +
+                " [班级] " + className +
                 " | 数学:" + math +
                 " 英语:" + english +
                 " 计导:" + cs +
