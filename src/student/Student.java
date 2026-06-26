@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id;       // 学号
-    private String name;     // 姓名
-    private String className;// 班级
+    private String id;
+    private String name;
+    private String className;
 
     private float math;
     private float english;
@@ -17,7 +17,6 @@ public class Student implements Serializable {
     private float total;
     private float avg;
 
-    // getter/setter
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
