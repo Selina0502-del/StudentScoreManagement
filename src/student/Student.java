@@ -2,9 +2,10 @@ package student;
 
 import java.io.Serializable;
 
+    // AI START
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    //AI END
     private String id;
     private String name;
     private String className;
